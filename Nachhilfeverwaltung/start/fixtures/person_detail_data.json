@@ -1,0 +1,42 @@
+[
+{
+    "model": "start.person_detail",
+    "pk": 1,
+    "fields": {
+        "klasse": null,
+        "profilBild": ""
+    }
+},
+{
+    "model": "start.person_detail",
+    "pk": 4,
+    "fields": {
+        "klasse": null,
+        "profilBild": ""
+    }
+},
+{
+    "model": "start.person_detail",
+    "pk": 5,
+    "fields": {
+        "klasse": "6c",
+        "profilBild": ""
+    }
+},
+{
+    "model": "start.person_detail",
+    "pk": 6,
+    "fields": {
+        "klasse": "12b",
+        "profilBild": ""
+    }
+},
+{
+    "model": "start.person_detail",
+    "pk": 7,
+    "fields": {
+        "klasse": null,
+        "profilBild": ""
+    }
+}
+]

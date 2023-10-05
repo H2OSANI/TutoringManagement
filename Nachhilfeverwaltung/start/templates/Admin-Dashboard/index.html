@@ -1,0 +1,392 @@
+{% extends  'base.html' %}
+{% block title %}Admin - Dashboard{% endblock %}
+{% block content %}
+{% block Navbar %}{% endblock %}
+<main class="mb-auto dark:bg-gray-700">
+    <div class="dark:bg-gray-700 border-b border-gray-200 dark:border-gray-700">
+        <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400 ">
+            <li class="mr-2">
+                <a href="{% url 'admin_dashboard' %}" class="inline-flex p-4 text-indigo-600 rounded-t-lg border-b-2 border-indigo-600 active dark:text-indigo-500 dark:border-indigo-500 group" aria-current="page">
+                    <svg aria-hidden="true" class="mr-2 w-5 h-5 text-indigo-600 dark:text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>Dashboard
+                </a>
+            </li>
+            <li class="mr-2">
+                <a href="{% url 'admin_dashboard_settings' %}" class="inline-flex felx-grow p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    <svg aria-hidden="true" class="mr-2 w-5 h-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"></path></svg>Settings
+                </a>
+            </li>
+            <li class="m-2 flex-grow text-end">
+                <button id="theme-toggle-admin" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon-admin" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon-admin" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </li>
+            <li class="m-2">
+                    <a href="{% url 'logout_user' %}" class="inline-flex p-2 bg-indigo-600 text-gray-50 rounded-lg">Abmelden</a>
+            </li>
+        </ul>
+    
+    </div>
+    {% if messages %}
+    <div class="absolute mx-auto inset-x-0 p-4 m-4 w-1/4 bg-indigo-500 text-white rounded-lg shadow-lg flex justify-between transition-all" id="message">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        <button onClick="closeMessage()" id="toggleMessage" class="transition-all duration-500 ease-in-out">✕</span>
+    </div> 
+    {% endif %}
+<div class="p-4 bg-white dark:bg-gray-700 block sm:flex items-center justify-between border-b dark:border-gray-500 border-gray-200 lg:mt-1.5">
+    <div class="mb-1 w-full">
+        <div class="mb-4">
+            <h1 class="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-100">Alle Benutzer</h1>
+        </div>
+        <div class="sm:flex">
+            <div class="hidden sm:flex items-center sm:divide-x sm:divide-gray-100 mb-3 sm:mb-0">
+                <form class="lg:pr-3" method="GET">
+                <label for="users-search" class="sr-only">Search</label>
+                <div class="mt-1 relative lg:w-64 xl:w-96">
+                    <input type="text" name="q" id="query" class="bg-gray-50 dark:bg-gray-600 dark:text-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5" placeholder="Suche nach Nutzern">
+                </div>
+                </form>
+
+            </div>
+            <div class="flex items-center space-x-2 sm:space-x-3 ml-auto">
+                <button type="button" data-modal-toggle="staticModal" class="w-1/2 text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 font-medium inline-flex items-center justify-center rounded-lg text-sm px-3 py-2 text-center sm:w-auto">
+                    <svg class="-ml-1 mr-2 h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Benutzer anlegen
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="flex flex-col dark:bg-gray-700">
+    <div class="">
+        <div class="align-middle inline-block min-w-full ">
+            <div class="shadow overflow-hidden ">
+                <table class="table-fixed min-w-full divide-y dark:divide-none divide-gray-200 dark:bg-gray-700">
+                    <thead class="bg-gray-100 dark:bg-gray-900">
+                        <tr>
+                            <th scope="col" class="p-4">
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">
+                                Name
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">
+                                Rolle
+                            </th>
+                            <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 dark:text-gray-100 uppercase">
+                                Status
+                            </th>
+                            <th scope="col" class="p-4">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-600 dark:divide-gray-500">
+                        {% for user in allUsers %}
+                        {% if user.missingLesson %}
+                            <tr class="bg-red-100 dark:bg-red-300 transition-all duration-100ms ease-in-out">
+                        {% else %}
+                            <tr class="hover:bg-gray-100 dark:hover:bg-gray-500 transition-all duration-100ms ease-in-out">
+                        {% endif %}
+                            <td class="p-4 w-4">
+                            </td>
+                            <td class="p-4 flex items-center whitespace-nowrap space-x-6 mr-12 lg:mr-0">
+                                <img class="h-10 w-10 rounded-full" src="{{MEDIA_URL}}media/default.jpeg">
+                                <div class="text-sm font-normal text-gray-500">
+                                    <div class="text-base font-semibold text-gray-900 dark:text-gray-50">{{ user.details.first_name }} {{ user.details.last_name }} </div>
+                                    <div class="text-sm font-normal text-gray-500 dark:text-gray-300">{{ user.details.email }}</div>
+                                </div>
+                                {% if user.missingLesson %}
+                                        <button data-tooltip-target="tooltip-animation" type="button" class="">
+                                            <svg class="w-10 h-10 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        </button>
+                                        <div id="tooltip-animation" role="tooltip" class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip dark:bg-gray-700">
+                                        Bitte Fächer ausfüllen!
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                {% endif %}
+                            </td>
+                            <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900 dark:text-gray-50">{{ user.details.groups.all |dictsortreversed:"id"|first }}</td>
+                            <td class="p-4 whitespace-nowrap text-base font-normal text-gray-900 dark:text-gray-50">
+                                <div class="flex w-full h-full justfy-around items-center">
+                                    {% if user.details.is_active  %}
+                                    <div class="h-2.5 w-2.5 rounded-full bg-green-400 mr-2"></div> 
+                                    <div>
+                                        <p>Aktiv</p>
+                                    </div>
+                                    {% else %} 
+                                    <div class="h-2.5 w-2.5 rounded-full bg-red-400 mr-2"></div> 
+                                    <div>
+                                        <p>Inaktiv</p>
+                                    </div> 
+                                    {% endif %}
+                                </div>
+                            </td>
+                            <td class="p-4 whitespace-nowrap space-x-2">
+                                {% if user.missingLesson %}
+                                <button type="button" data-modal-toggle="user-modal{{user.details.id}}" class="animate-bounce text-white bg-indigo-600 hover:bg-indigo-700 hover:animate-none focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+                                    <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                    Bearbeiten
+                                </button>
+                                {% else %}
+                                <button type="button" data-modal-toggle="user-modal{{user.details.id}}" class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+                                    <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd"></path></svg>
+                                    Bearbeiten
+                                </button>
+                                {% endif %}
+                                <button type="button" data-modal-toggle="delete-user-modal{{user.details.id}}" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+                                    <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+                                    Löschen
+                                </button>
+                            </td>
+                        </tr>
+                        <!-- Delete User Modal -->
+<div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full" id="delete-user-modal{{user.details.id}}">
+    <div class="relative w-full max-w-md px-4 h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="bg-white dark:bg-gray-700 dark:text-white rounded-lg shadow relative">
+            <!-- Modal header -->
+            <div class="flex justify-end p-2">
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="delete-user-modal{{user.details.id}}">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 pt-0 text-center">
+                <svg class="w-20 h-20 text-red-600 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <h3 class="text-xl font-normal text-gray-500 dark:text-gray-100 mt-5 mb-6">Sind Sie sicher, dass Sie den Benutzer löschen wollen?</h3>
+                <a href="user_delete/{{user.details.id}}" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-base inline-flex items-center px-3 py-2.5 text-center mr-2">
+                    Ja, ich bin sicher
+                </a>
+                <a href="#" class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-indigo-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base px-3 py-2.5 text-center" data-modal-toggle="delete-user-modal{{user.details.id}}">
+                    Nein, abbrechen
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Edit User Modal -->
+<div class="hidden overflow-x-hidden overflow-y-auto fixed top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center h-modal sm:h-full" id="user-modal{{user.details.id}}">
+    <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="bg-gray-50 dark:bg-gray-700 dark:text-white text-black rounded-lg shadow relative">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-5 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-indigo-600">
+                    Benutzer "{{user.details.username}}" bearbeiten
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-toggle="user-modal{{user.details.id}}">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-6 max-h-[600px] overflow-y-auto">
+                <form  method="post">
+                        {% csrf_token %}
+                        {% if user.editForm.faecher %}
+                        <div id="accordion-flush{{ user.details.id }}" data-accordion="open" data-active-classes="bg-white shadow-md rounded-lg dark:bg-gray-900 text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400">
+                            <h2 id="accordion-flush-heading-{{ user.details.id }}">
+                              <button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400" data-accordion-target="#accordion-flush-body-{{ user.details.id }}" aria-expanded="false" aria-controls="accordion-flush-body-{{ user.details.id }}">
+                                <span class="mx-3 flex items-center">
+                                    {% if user.missingLesson %}             
+                                        <svg class="w-6 h-6 animate-pulse text-red-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    {% endif %}
+                                    Fächer</span>
+                                <svg data-accordion-icon class="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                              </button>
+                            </h2>
+                            <div id="accordion-flush-body-{{ user.details.id }}" class="hidden" aria-labelledby="accordion-flush-heading-{{ user.details.id }}">
+                              <div class="py-5 grid grid-cols-2 mx-5 font-light border-b border-gray-200 dark:border-gray-700">
+                                {% for fach in user.editForm.faecher %}
+                                <div>
+                                    {{ fach }}
+                                </div>
+                                {% endfor %}
+                              </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <div class="grid grid-cols-3 gap-x-1">
+                            <div>
+                                {{ user.editForm.first_name.label }}
+                            </div>
+                            <div class="col-span-2 -ml-12">
+                                {{ user.editForm.first_name }}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3">
+                            <div>
+                                {{ user.editForm.last_name.label }}
+                            </div>
+                            <div class="col-span-2 -ml-12">
+                                {{ user.editForm.last_name }}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3">
+                            <div>
+                                {{ user.editForm.email.label }}
+                            </div>
+                            <div class="col-span-2 -ml-12">
+                                {{ user.editForm.email }}
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3">
+                            <div>
+                                {{ user.editForm.username.label }}
+                            </div>
+                            <div class="col-span-2 -ml-12">
+                                {{ user.editForm.username }}
+                            </div>
+                        </div>
+                        {% if user.editForm.klasse.label %}
+                            <div class="grid grid-cols-3">
+                                <div>
+                                    {{ user.editForm.klasse.label }}
+                                </div>
+                                <div class="col-span-2 -ml-12">
+                                    {{ user.editForm.klasse }}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {{ user.editForm.user }}
+                        {{ user.editForm.is_active.label }}
+                        {{ user.editForm.is_active }}
+                        
+                        
+
+                        <input type="hidden" name="form_type" value="editForm">
+                        <!-- Modal footer -->
+                        <div class="items-center p-6 border-t border-gray-200 rounded-b">
+                            <button class="text-white bg-indigo-600 hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">Aktualisieren</button>
+                        </div>
+                    </form>
+                </div>
+    </div>
+</div>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Add User Modal -->
+  <!-- Main modal -->
+  <div id="staticModal" targetEl data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 p-4 w-full md:inset-0 h-modal md:h-full">
+    <div class="relative w-full max-w-2xl h-full md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Benutzer anlegen
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="staticModal">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form method="POST">
+              {% csrf_token %}
+              <div class="mx-4">
+                  <div class="my-6">
+                      {{ form.addFirst_name }}
+                  </div>
+                  <div class="mb-6">
+                      {{ form.addLast_name }}
+                  </div>
+                  <div class="mb-6">
+                      {{ form.addEmail }}
+                  </div>
+                  <div class="mb-6">
+                      {{ form.addRole }}
+                  </div>
+                  <div class="mb-6">
+                      {{ form.addKlasse }}
+                  </div>
+              </div>   
+              <input type="hidden" name="form_type" value="form">
+            <!-- Modal footer -->
+              <div class="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
+                <button data-modal-toggle="staticModal" type="submit" class="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">Erstellen</button>
+                <button data-modal-toggle="staticModal" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-indigo-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Abbrechen</button>
+              </div>
+          </form>
+        </div>
+    </div>
+</div>
+
+</main>
+<script defer>
+    let groupSelection = document.querySelector('#id_addRole')
+    const themeToggleDarkIconAdmin = document.getElementById('theme-toggle-dark-icon-admin');
+    const themeToggleLightIconAdmin = document.getElementById('theme-toggle-light-icon-admin');
+
+
+// Change the icons inside the button based on previous settings
+if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    themeToggleLightIconAdmin.classList.remove('hidden');
+} else {
+    themeToggleDarkIconAdmin.classList.remove('hidden');
+}
+
+const themeToggleBtnAdmin = document.getElementById('theme-toggle-admin');
+
+themeToggleBtnAdmin.addEventListener('click', function() {
+
+    // toggle icons inside button
+    themeToggleDarkIconAdmin.classList.toggle('hidden');
+    themeToggleLightIconAdmin.classList.toggle('hidden');
+
+    // if set via local storage previously
+    if (localStorage.getItem('color-theme')) {
+        if (localStorage.getItem('color-theme') === 'light') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        }
+
+    // if NOT set via local storage previously
+    } else {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('color-theme', 'light');
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('color-theme', 'dark');
+        }
+    }
+    
+});
+    groupSelection.addEventListener('change', (event) => {
+        const klasse = document.querySelector('#id_addKlasse');
+        if (event.target.value == 1){
+            klasse.classList.remove("hidden");
+        }
+        else
+            klasse.classList.add("hidden");
+            klasse.value = ""
+      });
+</script>
+<script>
+    setTimeout(autoCloseMessage, 6000);
+    function closeMessage(){
+        const message = document.querySelector("#message")
+    
+        message.classList.remove('opacity-100');
+        message.classList.add('opacity-0');
+        setTimeout(() => { message.classList.add('hidden') }, 500);
+}
+    function autoCloseMessage(){
+        if(document.querySelector("#message")){
+            setTimeout(closeMessage(), 10000);
+        }
+    }
+</script>
+{% endblock %}

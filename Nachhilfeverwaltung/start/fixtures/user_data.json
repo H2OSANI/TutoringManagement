@@ -1,0 +1,106 @@
+[
+{
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$fAbLg2aFYUO3rNBvg1ZH1Z$a/CNQpJHS/qJeT05xZOi4qujDXh+2r4WKVm0T14Nyy0=",
+        "last_login": "2022-12-08T21:06:13.978Z",
+        "is_superuser": false,
+        "username": "INIT",
+        "first_name": "INIT",
+        "last_name": "INIT",
+        "email": "INIT",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-07T07:55:22Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$fAbLg2aFYUO3rNBvg1ZH1Z$a/CNQpJHS/qJeT05xZOi4qujDXh+2r4WKVm0T14Nyy0=",
+        "last_login": "2022-12-08T21:06:13.978Z",
+        "is_superuser": false,
+        "username": "Hans",
+        "first_name": "Hans",
+        "last_name": "Apfelbeck",
+        "email": "hans.apfelbeck@t-online.de",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-07T07:55:22Z",
+        "groups": [
+            1,
+            2
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$729H0uNNaFhxHx0Tctm8NV$tDnATkfYCt7ywR4+1V1gVzexjIqCM5qQPqSjmOldkd8=",
+        "last_login": "2022-12-08T21:16:23.944Z",
+        "is_superuser": false,
+        "username": "Max",
+        "first_name": "Maximilian",
+        "last_name": "Huber",
+        "email": "max.huber@web.de",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-07T07:56:26Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 6,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$sZ35YOaigML0J0XY1Ig0SD$aB1ycPxdF22w5B3neAfkjDD5jEAn781X+17sucFngTI=",
+        "last_login": "2022-12-08T16:09:14.844Z",
+        "is_superuser": false,
+        "username": "Peter",
+        "first_name": "Peter",
+        "last_name": "Lustig",
+        "email": "peter.lustig@gmx.com",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-07T07:57:14Z",
+        "groups": [
+            1
+        ],
+        "user_permissions": []
+    }
+},
+{
+    "model": "auth.user",
+    "pk": 7,
+    "fields": {
+        "password": "pbkdf2_sha256$390000$bpdaQNVcaAtdddHrYC6FJN$v/rjbkmQKGJ31etzMGSBv3H5DchuHUmybzuRN9h9oIE=",
+        "last_login": "2022-12-08T21:23:39.443Z",
+        "is_superuser": false,
+        "username": "Admin",
+        "first_name": "Admin",
+        "last_name": "",
+        "email": "admin@online.de",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2022-11-07T07:58:08Z",
+        "groups": [
+            1,
+            2,
+            3
+        ],
+        "user_permissions": []
+    }
+}
+
+]

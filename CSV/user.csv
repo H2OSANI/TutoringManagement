@@ -1,0 +1,6 @@
+id;password;last_login;is_superuser;username;last_name;email;is_staff;is_active;date_joined;first_name
+1;sr123;05.11.22 19:39;0;Sebastian;Rauch;Sebastian.Rauch@stud.th-deg.de;1;1;05.11.22 12:39;Sebastian
+2;jz123;05.11.22 19:39;0;Johannes;Zitzelsberger;Johannes.Zitzelsberger@stud.th-deg.de;1;1;05.11.22 12:39;Johannes
+3;sp123;05.11.22 19:39;0;Sandro;Podhorodeski;Sandropodho467@t-online.de;1;1;05.11.22 12:39;Sandro
+4;ha123;05.11.22 19:39;0;Hans;Apfelbeck;Hans.AP@edv-schule.de;1;1;05.11.22 12:39;Hans
+5;admin;05.11.22 19:39;0;Peter;Lustig;Admin.Lustig@online.de;1;1;05.11.22 12:39;Peter

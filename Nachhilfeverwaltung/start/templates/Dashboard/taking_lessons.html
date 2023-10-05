@@ -1,0 +1,94 @@
+{% extends  'base.html' %}
+{% block title %}Nachhilfeverwaltung | Einstellungen{% endblock %}
+    {% block content %}
+<div class="mb-auto">
+    <main class="flex justify-center">
+        <div class="max-w-7xl" id="wrapper">
+            <div class="mb-6">
+                {% if messages %}
+                <div class="bg-green-200 text-green-600 flex justify-between p-2 rounded-xl transition-all" id="message">
+                    {% for message in messages %}
+                        {{ message }}
+                        <button onClick="closeMessage()" id="toggleMessage" class="transition-all duration-500 ease-in-out">✕</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <form action="" class="grid grid-cols-1 gap-y-8 border border-gray-100 dark:border-gray-500 rounded-xl p-12 shadow-lg" method="POST">    
+                    {% csrf_token %}
+                    <input type="datetime-local" name="datum_uhrzeit" id="Max {{ i.id }}" class="inline-block w-48 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500" >
+                    <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <tr>
+                                <th scope="col" class="py-3 px-6">
+                                    Auswahl
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Klasse_von
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Klasse_bis
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Fach
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Preis
+                                </th>
+                                <th scope="col" class="py-3 px-6">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in nachhilfe %}
+                                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                                    <th class="py-4 px-6">
+                                        <input type="radio" name="nachhilfe_ID" id="{{ i.id }}" value="{{ i.id }}">
+                                    </th>
+                                    <td class="py-4 px-6">
+                                        {{i.klasse_von}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{i.klasse_bis}}
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        {{i.fach_ID}}
+                                    </td>
+                                    <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{i.preis}}€
+                                    </td>
+                                    <td class="py-4 px-6">
+                                        <a href="{% url 'chat' i.person_ID.id %}"  class="mt-3 inline-flex w-full justify-center rounded-md  bg-indigo-600 px-4 py-2 text-base font-medium text-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">💬 Termin vereinbaren</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit"
+                        class="inline-block w-48 px-2 py-2 bg-indigo-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:rounded-xl hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition-all duration-500 ease-in-out"
+                        >
+                        Nachhilfe Buchen
+                </button>
+            </form>
+        </div>
+    </main>
+</div>
+    <script>
+        setTimeout(autoCloseMessage, 3700);
+        function closeMessage(){
+            const message = document.querySelector("#message")
+        
+            message.classList.remove('opacity-100');
+            message.classList.add('opacity-0');
+            setTimeout(() => { message.classList.add('hidden') }, 500);
+    }
+        function autoCloseMessage(){
+            if(document.querySelector("#message")){
+                setTimeout(closeMessage(), 10000);
+            }
+        }
+    </script>
+{% endblock %}

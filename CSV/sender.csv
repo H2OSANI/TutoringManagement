@@ -1,0 +1,6 @@
+id;message;time;empfaenger_ID_id;person_ID_id
+1;Hallo Peter;07.12.22 12:00;1;5
+2;Hallo Max;07.12.22 12:01;2;6
+3;Ich will Nachhilfe;07.12.22 12:02;3;5
+4;gerne!;07.12.22 12:03;4;6
+5;buche diese bitte :);07.12.22 12:03;5;6

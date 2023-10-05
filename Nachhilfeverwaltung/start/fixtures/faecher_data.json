@@ -1,0 +1,128 @@
+[
+{
+    "model": "start.faecher",
+    "pk": 1,
+    "fields": {
+        "fachbezeichnung": "Deutsch"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 2,
+    "fields": {
+        "fachbezeichnung": "Englisch"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 3,
+    "fields": {
+        "fachbezeichnung": "Franzoesisch"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 4,
+    "fields": {
+        "fachbezeichnung": "Latein"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 5,
+    "fields": {
+        "fachbezeichnung": "Russisch"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 6,
+    "fields": {
+        "fachbezeichnung": "Spanisch"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 7,
+    "fields": {
+        "fachbezeichnung": "Mathematik"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 8,
+    "fields": {
+        "fachbezeichnung": "Informatik"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 9,
+    "fields": {
+        "fachbezeichnung": "Naturwissenschaften"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 10,
+    "fields": {
+        "fachbezeichnung": "Technik"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 11,
+    "fields": {
+        "fachbezeichnung": "Gesellschaftswissenschaften"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 12,
+    "fields": {
+        "fachbezeichnung": "Musik"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 13,
+    "fields": {
+        "fachbezeichnung": "Sport"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 14,
+    "fields": {
+        "fachbezeichnung": "Biologie"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 15,
+    "fields": {
+        "fachbezeichnung": "Geschichte"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 16,
+    "fields": {
+        "fachbezeichnung": "Physik"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 17,
+    "fields": {
+        "fachbezeichnung": "Chemie"
+    }
+},
+{
+    "model": "start.faecher",
+    "pk": 18,
+    "fields": {
+        "fachbezeichnung": "Erdkunde"
+    }
+}
+]

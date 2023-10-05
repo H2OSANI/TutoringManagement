@@ -1,0 +1,47 @@
+[
+{
+    "model": "start.personen_faecher",
+    "pk": 1,
+    "fields": {
+        "person_ID": 5,
+        "fach_ID": 1,
+        "nachhilfeflag": true
+    }
+},
+{
+    "model": "start.personen_faecher",
+    "pk": 2,
+    "fields": {
+        "person_ID": 5,
+        "fach_ID": 2,
+        "nachhilfeflag": false
+    }
+},
+{
+    "model": "start.personen_faecher",
+    "pk": 4,
+    "fields": {
+        "person_ID": 6,
+        "fach_ID": 1,
+        "nachhilfeflag": true
+    }
+},
+{
+    "model": "start.personen_faecher",
+    "pk": 5,
+    "fields": {
+        "person_ID": 6,
+        "fach_ID": 8,
+        "nachhilfeflag": true
+    }
+},
+{
+    "model": "start.personen_faecher",
+    "pk": 6,
+    "fields": {
+        "person_ID": 6,
+        "fach_ID": 6,
+        "nachhilfeflag": true
+    }
+}
+]

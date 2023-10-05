@@ -1,0 +1,79 @@
+[
+{
+    "model": "start.sender",
+    "pk": 48,
+    "fields": {
+        "message": "",
+        "time": "2023-01-17T20:27:18.842Z",
+        "person_ID": 6,
+        "empfaenger_ID": 4,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 49,
+    "fields": {
+        "message": "hallo Hans ich bin der Peter",
+        "time": "2023-01-17T20:27:29.583Z",
+        "person_ID": 6,
+        "empfaenger_ID": 4,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 50,
+    "fields": {
+        "message": "",
+        "time": "2023-01-17T20:27:41.140Z",
+        "person_ID": 6,
+        "empfaenger_ID": 5,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 51,
+    "fields": {
+        "message": "Hallo Max ich bin der Peter",
+        "time": "2023-01-17T20:27:53.240Z",
+        "person_ID": 6,
+        "empfaenger_ID": 5,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 52,
+    "fields": {
+        "message": "",
+        "time": "2023-01-17T20:28:39.921Z",
+        "person_ID": 5,
+        "empfaenger_ID": 6,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 53,
+    "fields": {
+        "message": "Hallo Peter ich bin der Max",
+        "time": "2023-01-17T20:28:39.931Z",
+        "person_ID": 5,
+        "empfaenger_ID": 6,
+        "newmessageflag": false
+    }
+},
+{
+    "model": "start.sender",
+    "pk": 54,
+    "fields": {
+        "message": "hallo Peter ich bin der Hans",
+        "time": "2023-01-17T20:29:07.781Z",
+        "person_ID": 4,
+        "empfaenger_ID": 6,
+        "newmessageflag": false
+    }
+}
+]

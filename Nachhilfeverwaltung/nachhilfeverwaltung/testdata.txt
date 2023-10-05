@@ -1,0 +1,7 @@
+python3 manage.py loaddata faecher_data.json
+python3 manage.py loaddata group_data.json
+python3 manage.py loaddata user_data.json
+python3 manage.py loaddata person_detail_data.json
+python3 manage.py loaddata personen_faecher_data.json
+python3 manage.py loaddata sender_data.json
+python3 manage.py loaddata settings_content_data.json

@@ -1,0 +1,59 @@
+{% extends  'base.html' %}
+{% block title %}Nachhilfeverwaltung | Einstellungen{% endblock %}
+    {% block content %}
+<div class="mb-auto">
+
+    
+    <p class="text-3xl text-center my-4 dark:text-gray-100">Willkommen {{ request.user.first_name |lower|capfirst }} {{ request.user.last_name |lower|capfirst }} !</p>
+    <p class="text-xl text-center my-4 dark:text-gray-100">Hier kannst du sehen und festlegen, wie auf der Nachhilfeverwaltung dein Profil angezeigt wird</p>
+    <p class="text-xl text-center my-4 dark:text-gray-50 italic">Angemeldet als: {{ request.user.email |lower }}</p>
+    <main class="flex justify-center">
+        <div class="max-w-7xl" id="wrapper">
+            <div class="mb-6">
+                {% if messages %}
+                <div class="bg-green-200 text-green-600 flex justify-between p-2 rounded-xl transition-all" id="message">
+                    {% for message in messages %}
+                        {{ message }}
+                        <button onClick="closeMessage()" id="toggleMessage" class="transition-all duration-500 ease-in-out">✕</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <form class="grid grid-cols-3 gap-y-6 border border-gray-400 rounded-xl p-12" method="POST">    
+                {% csrf_token %}
+                <label for="first_name" class="p-1 dark:text-gray-50">Vorname:</label>
+                <span class="col-span-2">{{ userform.first_name }}</span>
+                <label for="last_name" class="p-1 dark:text-gray-50">Nachname:</label>
+                <span class="col-span-2">{{ userform.last_name }}</span>
+                <label for="email" class="p-1 dark:text-gray-50">Email:</label>
+                <span class="col-span-2">{{ userform.email }}</span>
+                {% if not isTeacher%}
+                    <label for="klasse" class="p-1 dark:text-gray-50">Jahrgangsstufe:</label>
+                    <span class="col-span-2">{{ userform.klasse }}</span>
+                {% endif %}
+                <button type="submit"
+                    class="inline-block px-2 py-2 bg-indigo-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:rounded-xl hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition-all duration-500 ease-in-out"
+                    >
+                    Speichern
+                </button>
+                <a href="{% url 'settings_user_password' %}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium ml-4">Passwort ändern</a>
+            </form>
+        </div>
+    </main>
+</div>
+    <script>
+        setTimeout(autoCloseMessage, 3700);
+        function closeMessage(){
+            const message = document.querySelector("#message")
+        
+            message.classList.remove('opacity-100');
+            message.classList.add('opacity-0');
+            setTimeout(() => { message.classList.add('hidden') }, 500);
+    }
+        function autoCloseMessage(){
+            if(document.querySelector("#message")){
+                setTimeout(closeMessage(), 10000);
+            }
+        }
+    </script>
+{% endblock %}

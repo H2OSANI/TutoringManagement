@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% block title %}Nachhilfeverwaltung | Schülermanagement{% endblock %}
+{% block content %}
+<div class="mb-auto flex flex-col">
+  <div class="w-full flex flex-col justify-center items-center mt-4">
+    <form method="GET" class="w-1/2">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Suchen</label>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+        <input type="search" id="query" name="q" value="{{ request.GET.q }}"
+          class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="Schüler für Nachhilfe suchen..." required>
+        <button type="submit"
+          class="text-white absolute right-2.5 bottom-2.5 bg-indigo-600  hover:bg-indigo-800 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 transition-all duration-300 ease-in-out">Suchen</button>
+      </div>
+    </form>
+    {% if messages %}
+        <div class="bg-gray-50 dark:bg-gray-700 italic text-indigo-600 dark:text-indigo-400 flex justify-between p-2 w-1/2 transition-all -mt-1 py-4 rounded-b-lg shadow-md" id="message">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if userListSearch %}
+    <div class="w-1/2 rounded-lg">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-200 w-full">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Name
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Klasse
+            </th>
+            <th scope="col" class="py-3 px-6">
+
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          {% for result in userListSearch %}
+          <div>
+            <div class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+              id="addModal{{result.studentSearched.pk}}">
+              <div class="fixed inset-0 bg-gray-800 bg-opacity-40 transition-opacity"></div>
+
+              <div class="fixed inset-0 z-10 overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div
+                      class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg p-6 bg-gray-50 dark:bg-gray-800">
+                      <div class="bg-gray-50 dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start bg-gray-50 dark:bg-gray-800">
+                          <div class="mt-2 text-center  sm:mt-0 sm:ml-4 sm:text-left bg-gray-50 dark:bg-gray-800">
+                            <h3 class="text-indigo-600 -mt-2 text-xl mb-4">{{ result.studentSearched.first_name }} zur Nachhilfe hinzufügen</h3>
+                            <div class="text-gray-700 dark:text-gray-200">
+                              {{ result.addForm.givingLessons }}
+                              <div class="hidden pointer-none">
+                                {{ result.addForm.addUser}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <button onClick=closeAddModal({{result.studentSearched.pk}}) type="button"
+                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Abbrechen</button>
+                      <input type="submit"
+                        class="inline-flex cursor-pointer w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                        value="Hinzufügen" />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+           
+        
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{result.studentSearched.first_name}} {{result.studentSearched.last_name}} 
+          </th>
+          <td class="py-4 px-6">
+            {{result.klasse}}
+          </td>
+          <td class="py-4 px-6 text-end">
+            <a href="javascript:;" id="toggleDataModel{{result.studentSearched.pk}}"
+              onClick=openAddModal({{result.studentSearched.pk}})
+              class="font-medium text-white p-2.5 bg-green-600 rounded-lg hover:bg-green-400 transition-all duration-300 ease-in-out" data-toggle="">+ Hinzufügen</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+      </table>
+    </div>
+    {% endif %}
+  </div>
+  <main class="flex w-full justify-center items-center">
+    <div class="overflow-x-auto max-w-7xl relative shadow-md sm:rounded-lg mt-6 w-full">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 w-full">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              Id
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Vorname
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Nachname
+            </th>
+            <th scope="col" class="py-3 px-6">
+              Email
+            </th>
+            <th scope="col" class="py-3 px-6">
+
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <div class="hidden relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+            id="updateModal{{student.details.pk}}">
+            <!--
+                            Background backdrop, show/hide based on modal state.
+                        
+                            Entering: "ease-out duration-300"
+                              From: "opacity-0"
+                              To: "opacity-100"
+                            Leaving: "ease-in duration-200"
+                              From: "opacity-100"
+                              To: "opacity-0"
+                          -->
+            <div class="fixed inset-0 bg-gray-800 bg-opacity-40 transition-opacity" id="updateModalBg{{student.pk}}">
+            </div>
+
+            <div class="fixed inset-0 z-10 overflow-y-auto">
+              <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <!--
+                                Modal panel, show/hide based on modal state.
+                        
+                                Entering: "ease-out duration-300"
+                                  From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                                  To: "opacity-100 translate-y-0 sm:scale-100"
+                                Leaving: "ease-in duration-200"
+                                  From: "opacity-100 translate-y-0 sm:scale-100"
+                                  To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+                              -->
+                <form method="POST">
+                  {% csrf_token %}
+                  <div
+                    class="relative transform overflow-hidden rounded-lg bg-gray-800 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div class="bg-gray-50 dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                      <div class="sm:flex sm:items-start">
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                          <h3 class="text-lg font-medium leading-6 text-gray-900 text-indigo-600" id="modal-title">
+                            {{student.details.first_name}} {{student.details.last_name}} bearbeiten</h3>
+                          <div class="mt-2">
+                            <p class="text-sm text-gray-500 italic mb-2 pb-4 border-b border-indigo-600 dark:text-gray-200">Verlorene Daten
+                              können nach der Aktualisierung nicht wiederhergestellt werden</p>
+                            <h3 class="text-indigo-600 ">Nachhilfe geben in:</h3>
+                            <div class="dark:text-gray-200 text-gray-700">
+                              <div class="hidden pointer-none">
+                                {{ student.editForm.user }}
+                              </div>
+                              {{ student.editForm.editGivingLessons }}
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                      <button type="submit"
+                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm">Aktualisieren</button>
+                      <button onClick=closeModal({{student.details.pk}}) type="button"
+                        class="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Abbrechen</button>
+                      <a href="manage_students_delete/{{ student.details.id }}"
+                        class="mt-3 inline-flex w-full justify-center rounded-md  bg-red-600 px-4 py-2 text-base font-medium text-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">Löschen</a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          </form>
+
+
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              {{student.details.pk}}
+            </th>
+            <td class="py-4 px-6">
+              {{student.details.first_name}}
+            </td>
+            <td class="py-4 px-6">
+              {{student.details.last_name}}
+            </td>
+            <td class="py-4 px-6">
+              {{student.details.email}}
+            </td>
+            <td class="py-4 px-6">
+              <a href="javascript:;" id="toggleDataModel{{student.details.pk}}"
+                onClick=openModal({{student.details.pk}})
+                class="font-medium text-indigo-600 dark:text-indigo-500 hover:underline" data-toggle="">Bearbeiten</a>
+            </td>
+          </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script>
+  function openModal(id) {
+    const modal = document.querySelector(`#updateModal${id}`);
+    const bg = document.querySelector(`#updateModalBg${id}`);
+
+    modal.classList.remove("hidden")
+    bg.addEventListener("click", () => {
+      closeModal(id);
+    });
+  }
+
+  function closeModal(id) {
+    const modal = document.querySelector(`#updateModal${id}`);
+    modal.classList.add("hidden")
+  }
+
+  function openAddModal(id) {
+    const addModal = document.querySelector(`#addModal${id}`)
+
+    addModal.classList.remove("hidden")
+  }
+
+  function closeAddModal(id) {
+    const modal = document.querySelector(`#addModal${id}`);
+    modal.classList.add("hidden")
+  }
+</script>
+{% endblock %}
